@@ -1,0 +1,21 @@
+name: Basic CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Validate HTML, CSS, and JS
+      run: |
+        npm install -g html-validate
+        html-validate '**/*.html'
+        npx stylelint '**/*.css'
+        npx eslint '**/*.js'
